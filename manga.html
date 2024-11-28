@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manga Description</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Manga Description</h1>
+    </header>
+    <main>
+        <div class="manga-description">
+            <h2 id="manga-title"></h2>
+            <p id="manga-info"></p>
+            <a id="read-button" href="read.html">Start Reading</a>
+        </div>
+    </main>
+    <script>
+        // Simple JavaScript to handle manga descriptions
+        const urlParams = new URLSearchParams(window.location.search);
+        const manga = urlParams.get('manga');
+
+        const mangaData = {
+            'one-piece': {
+                title: 'One Piece',
+                description: 'A story about a young pirate named Monkey D. Luffy and his quest to find the One Piece treasure.'
+            },
+            'naruto': {
+                title: 'Naruto',
+                description: 'The story of Naruto Uzumaki, a young ninja who seeks recognition and dreams of becoming the Hokage.'
+            },
+            'attack-on-titan': {
+                title: 'Attack on Titan',
+                description: 'In a world where humanity resides within enormous walled cities to protect themselves from Titans.'
+            },
+            'death-note': {
+                title: 'Death Note',
+                description: 'A high school student discovers a supernatural notebook that allows him to kill anyone by writing their name in it.'
+            }
+        };
+
+        if (mangaData[manga]) {
+            document.getElementById('manga-title').innerText = mangaData[manga].title;
+            document.getElementById('manga-info').innerText = mangaData[manga].description;
+        } else {
+            document.getElementById('manga-title').innerText = 'Manga Not Found';
+            document.getElementById('manga-info').innerText = 'Sorry, we could not find the manga you are looking for.';
+            document.getElementById('read-button').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
