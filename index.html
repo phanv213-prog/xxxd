@@ -3,41 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manga Reader</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Chatbot Website</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <h1>Manga Reader</h1>
-    </header>
-    <main>
-        <h2>Available Manga</h2>
-        <div class="manga-grid">
-            <div class="manga-item">
-                <img src="images/one-piece.jpg" alt="One Piece">
-                <h3>One Piece</h3>
-                <p>A story about a young pirate named Monkey D. Luffy and his quest to find the One Piece treasure.</p>
-                <a class="read-button" href="manga.html?manga=one-piece">About</a>
-            </div>
-            <div class="manga-item">
-                <img src="images/naruto.jpg" alt="Naruto">
-                <h3>Naruto</h3>
-                <p>The story of Naruto Uzumaki, a young ninja who seeks recognition and dreams of becoming the Hokage.</p>
-                <a class="read-button" href="manga.html?manga=naruto">About</a>
-            </div>
-            <div class="manga-item">
-                <img src="images/attack-on-titan.jpg" alt="Attack on Titan">
-                <h3>Attack on Titan</h3>
-                <p>In a world where humanity resides within enormous walled cities to protect themselves from Titans.</p>
-                <a class="read-button" href="manga.html?manga=attack-on-titan">About</a>
-            </div>
-            <div class="manga-item">
-                <img src="images/death-note.jpg" alt="Death Note">
-                <h3>Death Note</h3>
-                <p>A high school student discovers a supernatural notebook that allows him to kill anyone by writing their name in it.</p>
-                <a class="read-button" href="manga.html?manga=death-note">About</a>
-            </div>
+    <div class="chat-container">
+        <header>
+            <h2>Chatbot</h2>
+        </header>
+        <ul class="chatbox"></ul>
+        <div class="chat-input">
+            <textarea id="chat-input" placeholder="Type your message..."></textarea>
+            <button id="send-btn">Send</button>
         </div>
-    </main>
+    </div>
+    <script src="script.js"></script>
 </body>
 </html>
