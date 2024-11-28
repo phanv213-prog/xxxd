@@ -3,21 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yaoi</title>
+    <title>Manga Reader</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header>
-        <h1>Yaoi</h1>
+        <h1>Manga Reader</h1>
     </header>
     <main>
         <h2>Available Manga</h2>
-        <ul class="yaoi-list">
-            <li><a href="manga.html?manga=one-piece">One Piece</a></li>
-            <li><a href="manga.html?manga=naruto">Naruto</a></li>
-            <li><a href="manga.html?manga=attack-on-titan">Attack on Titan</a></li>
-            <li><a href="manga.html?manga=death-note">Death Note</a></li>
-        </ul>
+        <div class="manga-grid">
+            <div class="manga-item">
+                <img src="images/one-piece.jpg" alt="One Piece">
+                <h3>One Piece</h3>
+                <p>A story about a young pirate named Monkey D. Luffy and his quest to find the One Piece treasure.</p>
+                <a class="read-button" href="manga.html?manga=one-piece">Read Now</a>
+            </div>
+            <div class="manga-item">
+                <img src="images/naruto.jpg" alt="Naruto">
+                <h3>Naruto</h3>
+                <p>The story of Naruto Uzumaki, a young ninja who seeks recognition and dreams of becoming the Hokage.</p>
+                <a class="read-button" href="manga.html?manga=naruto">Read Now</a>
+            </div>
+            <div class="manga-item">
+                <img src="images/attack-on-titan.jpg" alt="Attack on Titan">
+                <h3>Attack on Titan</h3>
+                <p>In a world where humanity resides within enormous walled cities to protect themselves from Titans.</p>
+                <a class="read-button" href="manga.html?manga=attack-on-titan">Read Now</a>
+            </div>
+            <div class="manga-item">
+                <img src="images/death-note.jpg" alt="Death Note">
+                <h3>Death Note</h3>
+                <p>A high school student discovers a supernatural notebook that allows him to kill anyone by writing their name in it.</p>
+                <a class="read-button" href="manga.html?manga=death-note">Read Now</a>
+            </div>
+        </div>
     </main>
 </body>
 </html>
