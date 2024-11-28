@@ -3,20 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Combined JSON Obfuscation Example</title>
+    <title>Manga Reader</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Combined JSON Obfuscation Example</h1>
-        <textarea id="jsonInput" placeholder="Enter JSON here..."></textarea>
-        <button id="obfuscateBtn">Obfuscate JSON</button>
-        <button id="deobfuscateBtn">De-obfuscate JSON</button>
-        <h2>Obfuscated JSON:</h2>
-        <pre id="obfuscatedOutput"></pre>
-        <h2>De-obfuscated JSON:</h2>
-        <pre id="deobfuscatedOutput"></pre>
-    </div>
-    <script src="script.js"></script>
+    <header>
+        <h1>Manga Reader</h1>
+    </header>
+    <main>
+        <h2>Available Manga</h2>
+        <ul class="manga-list">
+            <li><a href="manga.html?manga=one-piece">One Piece</a></li>
+            <li><a href="manga.html?manga=naruto">Naruto</a></li>
+            <li><a href="manga.html?manga=attack-on-titan">Attack on Titan</a></li>
+            <li><a href="manga.html?manga=death-note">Death Note</a></li>
+        </ul>
+    </main>
 </body>
 </html>
