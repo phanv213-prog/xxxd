@@ -1,44 +1,48 @@
 body {
     font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
+    background-color: #f0f0f0;
+}
+
+.chat-container {
+    width: 400px;
+    margin: 50px auto;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 header {
-    background: #333;
-    color: #fff;
-    padding: 10px 0;
+    background-color: #007bff;
+    color: white;
+    padding: 10px;
     text-align: center;
 }
 
-main {
-    padding: 20px;
+.chatbox {
+    list-style: none;
+    padding: 10px;
+    height: 300px;
+    overflow-y: auto;
 }
 
-.manga-list {
-    list-style-type: none;
-    padding: 0;
+.chat-input {
+    display: flex;
+    padding: 10px;
 }
 
-.manga-list li {
-    margin: 10px 0;
-}
-
-.manga-description {
-    margin-top: 20px;
-}
-
-#read-button {
-    display: inline-block;
-    margin-top: 20px;
-    padding: 10px 15px;
-    background: #007bff;
-    color: white;
-    text-decoration: none;
+textarea {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
     border-radius: 5px;
 }
 
-#read-button:hover {
-    background: #0056b3;
+button {
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }
