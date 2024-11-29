@@ -1,107 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manga Reader</title>
+    <title>PE Файл Резольв</title>
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header>
-        <h1>Manga Reader</h1>
-    </header>
-    <nav>
-        <a href="#">Home</a>
-        <a href="#">Latest</a>
-        <a href="#">Popular</a>
-        <a href="#">Genres</a>
-        <a href="#">Contact</a>
-    </nav>
-    <div class="container">
-        <div class="manga-list">
-            <div class="manga-item">
-                <img src="https://placehold.co/300x400" alt="Cover image of manga 1 with a detailed description of the characters and background">
-                <h3>Manga Title 1</h3>
-                <p>Short description of Manga 1.</p>
-            </div>
-            <div class="manga-item">
-                <img src="https://placehold.co/300x400" alt="Cover image of manga 2 with a detailed description of the characters and background">
-                <h3>Manga Title 2</h3>
-                <p>Short description of Manga 2.</p>
-            </div>
-            <div class="manga-item">
-                <img src="https://placehold.co/300x400" alt="Cover image of manga 3 with a detailed description of the characters and background">
-                <h3>Manga Title 3</h3>
-                <p>Short description of Manga 3.</p>
-            </div>
-            <div class="manga-item">
-                <img src="https://placehold.co/300x400" alt="Cover image of manga 4 with a detailed description of the characters and background">
-                <h3>Manga Title 4</h3>
-                <p>Short description of Manga 4.</p>
-            </div>
-            <div class="manga-item">
-                <img src="https://placehold.co/300x400" alt="Cover image of manga 5 with a detailed description of the characters and background">
-                <h3>Manga Title 5</h3>
-                <p>Short description of Manga 5.</p>
-            </div>
-            <div class="manga-item">
-                <img src="https://placehold.co/300x400" alt="Cover image of manga 6 with a detailed description of the characters and background">
-                <h3>Manga Title 6</h3>
-                <p>Short description of Manga 6.</p>
-            </div>
-            <div class="manga-item">
-                <img src="https://placehold.co/300x400" alt="Cover image of manga 7 with a detailed description of the characters and background">
-                <h3>Manga Title 7</h3>
-                <p>Short description of Manga 7.</p>
-            </div>
-            <div class="manga-item">
-                <img src="https://placehold.co/300x400" alt="Cover image of manga 8 with a detailed description of the characters and background">
-                <h3>Manga Title 8</h3>
-                <p>Short description of Manga 8.</p>
-            </div>
-            <div class="manga-item">
-                <img src="https://placehold.co/300x400" alt="Cover image of manga 9 with a detailed description of the characters and background">
-                <h3>Manga Title 9</h3>
-                <p>Short description of Manga 9.</p>
-            </div>
-            <div class="manga-item">
-                <img src="https://placehold.co/300x400" alt="Cover image of manga 10 with a detailed description of the characters and background">
-                <h3>Manga Title 10</h3>
-                <p>Short description of Manga 10.</p>
-            </div>
-            <div class="manga-item">
-                <img src="https://placehold.co/300x400" alt="Cover image of manga 11 with a detailed description of the characters and background">
-                <h3>Manga Title 11</h3>
-                <p>Short description of Manga 11.</p>
-            </div>
-            <div class="manga-item">
-                <img src="https://placehold.co/300x400" alt="Cover image of manga 12 with a detailed description of the characters and background">
-                <h3>Manga Title 12</h3>
-                <p>Short description of Manga 12.</p>
-            </div>
-            <div class="manga-item">
-                <img src="https://placehold.co/300x400" alt="Cover image of manga 13 with a detailed description of the characters and background">
-                <h3>Manga Title 13</h3>
-                <p>Short description of Manga 13.</p>
-            </div>
-            <div class="manga-item">
-                <img src="https://placehold.co/300x400" alt="Cover image of manga 14 with a detailed description of the characters and background">
-                <h3>Manga Title 14</h3>
-                <p>Short description of Manga 14.</p>
-            </div>
-            <div class="manga-item">
-                <img src="https://placehold.co/300x400" alt="Cover image of manga 15 with a detailed description of the characters and background">
-                <h3>Manga Title 15</h3>
-                <p>Short description of Manga 15.</p>
-            </div>
-        </div>
-    </div>
-    <footer>
-        <p>&copy; 2023 Manga Reader. All rights reserved.</p>
-    </footer>
-</body>
-</html>
+    <h1>Резольв Экспортов PE Файла</h1>
+    <input type="file" id="fileInput" accept=".dll">
+    <button id="analyzeButton">Анализировать</button>
+    <div id="output"></div>
+    <script src="script.js"></script>
 </body>
 </html>
