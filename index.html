@@ -344,6 +344,101 @@
             transition: all 0.3s ease;
         }
 
+        /* Ruan Mei Gallery Styles */
+        .gallery-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.95);
+            z-index: 100;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .gallery-container.active {
+            display: flex;
+        }
+
+        .gallery-header {
+            text-align: center;
+            margin-bottom: 30px;
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        .gallery-title {
+            font-size: 3rem;
+            background: linear-gradient(45deg, #ff00ff, #00ffff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .gallery-subtitle {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            width: 100%;
+            max-width: 1200px;
+            margin-bottom: 30px;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            aspect-ratio: 1/1;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(255, 0, 255, 0.3);
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .back-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: transparent;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 101;
+            padding: 10px;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: scale(1.1);
+        }
+
         /* Animations */
         @keyframes float {
             0%, 100% {
@@ -440,6 +535,18 @@
                 padding: 12px 25px;
                 font-size: 1rem;
             }
+
+            .gallery-title {
+                font-size: 2rem;
+            }
+
+            .gallery-subtitle {
+                font-size: 1rem;
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
         }
 
         @media (max-width: 480px) {
@@ -463,12 +570,25 @@
                 font-size: 1rem;
                 padding: 8px 16px;
             }
+
+            .gallery-title {
+                font-size: 1.8rem;
+            }
+
+            .gallery-subtitle {
+                font-size: 0.9rem;
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
         }
     </style>
 </head>
 <body>
     <div id="particles-js"></div>
     
+    <!-- Main Page -->
     <div class="container" id="main-container">
         <div class="logo animate">
             <h1>HornyBite</h1>
@@ -568,10 +688,48 @@
         </div>
     </div>
 
+    <!-- Hidden Ruan Mei Gallery (only accessible via direct link) -->
+    <div class="gallery-container" id="ruan-mei-gallery">
+        <button class="back-btn" id="back-btn">×</button>
+        <div class="gallery-header">
+            <h1 class="gallery-title">Ruan Mei</h1>
+            <p class="gallery-subtitle">Character Gallery</p>
+        </div>
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="https://via.placeholder.com/500x500/ff00ff/ffffff?text=Ruan+Mei+1" alt="Ruan Mei Image 1">
+            </div>
+            <div class="gallery-item">
+                <img src="https://via.placeholder.com/500x500/00ffff/ffffff?text=Ruan+Mei+2" alt="Ruan Mei Image 2">
+            </div>
+            <div class="gallery-item">
+                <img src="https://via.placeholder.com/500x500/ff00ff/ffffff?text=Ruan+Mei+3" alt="Ruan Mei Image 3">
+            </div>
+            <div class="gallery-item">
+                <img src="https://via.placeholder.com/500x500/00ffff/ffffff?text=Ruan+Mei+4" alt="Ruan Mei Image 4">
+            </div>
+            <div class="gallery-item">
+                <img src="https://via.placeholder.com/500x500/ff00ff/ffffff?text=Ruan+Mei+5" alt="Ruan Mei Image 5">
+            </div>
+            <div class="gallery-item">
+                <img src="https://via.placeholder.com/500x500/00ffff/ffffff?text=Ruan+Mei+6" alt="Ruan Mei Image 6">
+            </div>
+        </div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
         // Wait for DOM to be fully loaded
         document.addEventListener('DOMContentLoaded', function() {
+            // Check URL for gallery parameter
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.has('gallery') && urlParams.get('gallery') === 'ruanmei') {
+                // Show gallery and hide main page
+                document.getElementById('main-container').style.display = 'none';
+                document.getElementById('particles-js').style.display = 'none';
+                document.getElementById('ruan-mei-gallery').classList.add('active');
+            }
+
             // Initialize particles.js with smoother configuration
             particlesJS("particles-js", {
                 "particles": {
@@ -710,6 +868,15 @@
             const closeDiscord = document.getElementById('close-discord');
             const particles = document.getElementById('particles-js');
             const discordTag = document.getElementById('discord-tag');
+            const backBtn = document.getElementById('back-btn');
+            const ruanMeiGallery = document.getElementById('ruan-mei-gallery');
+
+            // Back button functionality for gallery
+            if (backBtn) {
+                backBtn.addEventListener('click', function() {
+                    window.location.href = window.location.pathname;
+                });
+            }
 
             // Discord tag copy functionality
             discordTag.addEventListener('click', function() {
