@@ -244,28 +244,40 @@
             background: rgba(255, 255, 255, 0.1);
         }
 
+        /* Discord Tag Styles */
         .discord-tag {
             background-color: rgba(88, 101, 242, 0);
-            padding: 10px 20px;
+            padding: 12px 24px;
             border-radius: 5px;
             font-family: monospace;
             font-size: 1.2rem;
             margin: 20px 0;
             display: inline-block;
-            transition: all 0.4s ease, background-color 0.3s ease 0.2s;
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
             transform: scale(0.95);
             cursor: pointer;
             position: relative;
+            border: 1px solid rgba(88, 101, 242, 0.3);
+            box-shadow: 0 0 0px rgba(88, 101, 242, 0);
         }
 
         .menu-section.active .discord-tag {
-            background-color: #5865F2;
+            background-color: rgba(88, 101, 242, 0.2);
             transform: scale(1);
+            border: 1px solid rgba(88, 101, 242, 0.5);
         }
 
         .discord-tag:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 15px rgba(88, 101, 242, 0.5);
+            transform: scale(1.03);
+            background-color: rgba(88, 101, 242, 0.3);
+            box-shadow: 0 0 20px rgba(88, 101, 242, 0.3);
+        }
+
+        .discord-tag.copied {
+            animation: pulseGlow 0.5s ease;
+            background-color: rgba(76, 175, 80, 0.3);
+            border: 1px solid rgba(76, 175, 80, 0.5);
+            box-shadow: 0 0 20px rgba(76, 175, 80, 0.3);
         }
 
         /* Tooltip styles */
@@ -275,24 +287,54 @@
             bottom: 100%;
             left: 50%;
             transform: translateX(-50%);
-            background-color: #333;
+            background-color: #5865F2;
             color: white;
-            padding: 5px 10px;
+            padding: 6px 12px;
             border-radius: 5px;
             font-size: 0.8rem;
             white-space: nowrap;
             opacity: 0;
-            transition: opacity 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
             pointer-events: none;
+            transform-origin: bottom center;
+            scale: 0.9;
         }
 
         .discord-tag:hover::after {
             opacity: 1;
+            scale: 1;
+            bottom: 120%;
         }
 
         .discord-tag.copied::after {
-            content: 'Copied!';
+            content: 'Copied! ✓';
             background-color: #4CAF50;
+            animation: fadeTooltip 2s forwards;
+        }
+
+        /* Google Form Button */
+        .google-form-btn {
+            display: inline-block;
+            background-color: #4285F4;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 500;
+            margin-top: 20px;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            border: 1px solid rgba(66, 133, 244, 0.3);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .google-form-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(66, 133, 244, 0.4);
+            background-color: #3367D6;
+        }
+
+        .google-form-btn:active {
+            transform: translateY(0);
         }
 
         .warning {
@@ -312,12 +354,33 @@
             }
         }
 
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
+        @keyframes pulseGlow {
+            0% {
+                box-shadow: 0 0 0px rgba(76, 175, 80, 0.3);
             }
-            to {
+            50% {
+                box-shadow: 0 0 30px rgba(76, 175, 80, 0.6);
+            }
+            100% {
+                box-shadow: 0 0 0px rgba(76, 175, 80, 0.3);
+            }
+        }
+
+        @keyframes fadeTooltip {
+            0% {
                 opacity: 1;
+                scale: 1;
+                bottom: 120%;
+            }
+            70% {
+                opacity: 1;
+                scale: 1;
+                bottom: 120%;
+            }
+            100% {
+                opacity: 0;
+                scale: 0.9;
+                bottom: 130%;
             }
         }
 
@@ -415,6 +478,7 @@
         <div class="nav-buttons">
             <button class="nav-button" id="about-btn">About Me</button>
             <button class="nav-button" id="bots-btn">Bots I Make</button>
+            <button class="nav-button" id="requests-btn">Bot Requests</button>
             <a href="https://janitorai.com" target="_blank" class="nav-button" id="janitor-btn">Janitor AI Profile</a>
             <button class="nav-button" id="discord-btn">Discord DM</button>
         </div>
@@ -452,6 +516,33 @@
                     <li><strong>DeadDove</strong> - Very rarely</li>
                 </ul>
                 <p>Most of my bots are AnyPov. However, some may be WLW or MalePov, if scenario demands that. Note that I don't make NTR, MLM or content that triggers me.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bot Requests Section -->
+    <div class="menu-section" id="requests-section">
+        <div class="menu-content">
+            <button class="close-btn" id="close-requests">×</button>
+            <h2 class="menu-title">Bot Requests</h2>
+            <div class="menu-text">
+                <p>Want to request a custom bot? Please read the following guidelines before submitting your request:</p>
+                
+                <ul style="text-align: left; margin: 20px 0; padding-left: 20px;">
+                    <li><strong>I accept requests for:</strong> RPG, Fluff, Angst, and Media Characters (games/movies/anime/manga)</li>
+                    <li><strong>I don't accept:</strong> NTR, MLM, or any content that triggers me</li>
+                    <li>Please provide detailed information about the character/scenario</li>
+                    <li>Include links to the reference images if available</li>
+                    <li>I can't guarantee I'll fulfill all requests, but I'll consider each one</li>
+                </ul>
+                
+                <p>Submit your request through the Google Form below. I'll review it and get back to you if I decide to create your bot!</p>
+                
+                <a href="https://forms.gle/YOUR_FORM_ID_HERE" target="_blank" class="google-form-btn">
+                    Submit Bot Request
+                </a>
+                
+                <p class="warning">⚠️ Please don't spam requests. I reserve the right to reject any request if I consider it triggering or if I simply don't like it.</p>
             </div>
         </div>
     </div>
@@ -607,12 +698,15 @@
             const footer = document.querySelector('.footer');
             const aboutBtn = document.getElementById('about-btn');
             const botsBtn = document.getElementById('bots-btn');
+            const requestsBtn = document.getElementById('requests-btn');
             const discordBtn = document.getElementById('discord-btn');
             const aboutSection = document.getElementById('about-section');
             const botsSection = document.getElementById('bots-section');
+            const requestsSection = document.getElementById('requests-section');
             const discordSection = document.getElementById('discord-section');
             const closeAbout = document.getElementById('close-about');
             const closeBots = document.getElementById('close-bots');
+            const closeRequests = document.getElementById('close-requests');
             const closeDiscord = document.getElementById('close-discord');
             const particles = document.getElementById('particles-js');
             const discordTag = document.getElementById('discord-tag');
@@ -680,6 +774,11 @@
                 openMenu(botsSection);
             });
 
+            // Show requests section
+            requestsBtn.addEventListener('click', () => {
+                openMenu(requestsSection);
+            });
+
             // Show discord section
             discordBtn.addEventListener('click', () => {
                 openMenu(discordSection);
@@ -695,13 +794,18 @@
                 closeMenu(botsSection);
             });
 
+            // Close requests section
+            closeRequests.addEventListener('click', () => {
+                closeMenu(requestsSection);
+            });
+
             // Close discord section
             closeDiscord.addEventListener('click', () => {
                 closeMenu(discordSection);
             });
 
             // Close menus when clicking outside content
-            [aboutSection, botsSection, discordSection].forEach(section => {
+            [aboutSection, botsSection, requestsSection, discordSection].forEach(section => {
                 section.addEventListener('click', (e) => {
                     if (e.target === section) {
                         const closeBtn = section.querySelector('.close-btn');
