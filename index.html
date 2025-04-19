@@ -22,6 +22,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            transition: background-color 0.5s ease;
         }
 
         #particles-js {
@@ -31,6 +32,8 @@
             top: 0;
             left: 0;
             z-index: 0;
+            opacity: 0.7;
+            transition: opacity 0.5s ease;
         }
 
         .container {
@@ -39,11 +42,25 @@
             text-align: center;
             max-width: 1200px;
             padding: 0 20px;
-            transition: all 0.5s ease;
+            transition: all 0.5s cubic-bezier(0.65, 0, 0.35, 1);
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .container.hidden {
+            transform: translateY(20px);
+            opacity: 0;
+            pointer-events: none;
         }
 
         .logo {
             margin-bottom: 40px;
+            transform: translateY(0);
+            transition: transform 0.5s ease, opacity 0.5s ease;
+        }
+
+        .logo.animate {
+            animation: float 3s ease-in-out infinite;
         }
 
         .logo h1 {
@@ -54,11 +71,14 @@
             background-clip: text;
             color: transparent;
             margin-bottom: 10px;
+            text-shadow: 0 0 10px rgba(255, 0, 255, 0.3);
+            transition: all 0.3s ease;
         }
 
         .logo p {
             font-size: 1.2rem;
             color: rgba(255, 255, 255, 0.7);
+            transition: all 0.3s ease;
         }
 
         .nav-buttons {
@@ -78,10 +98,12 @@
             font-weight: 500;
             border: 2px solid rgba(255, 255, 255, 0.3);
             border-radius: 50px;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
             overflow: hidden;
             background: transparent;
             cursor: pointer;
+            transform: translateY(0) scale(1);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
         .nav-button::before {
@@ -92,12 +114,17 @@
             width: 100%;
             height: 100%;
             background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-            transition: 0.5s;
+            transition: 0.6s;
         }
 
         .nav-button:hover {
             border-color: #ff00ff;
-            box-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff;
+            box-shadow: 0 0 15px #ff00ff, 0 0 25px #ff00ff, 0 5px 15px rgba(0, 0, 0, 0.2);
+            transform: translateY(-3px) scale(1.03);
+        }
+
+        .nav-button:active {
+            transform: translateY(1px) scale(0.98);
         }
 
         .nav-button:hover::before {
@@ -108,6 +135,14 @@
             margin-top: 80px;
             color: rgba(255, 255, 255, 0.5);
             font-size: 0.9rem;
+            transition: all 0.5s ease;
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .footer.hidden {
+            transform: translateY(20px);
+            opacity: 0;
         }
 
         /* Menu sections */
@@ -117,7 +152,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.9);
+            background-color: rgba(0, 0, 0, 0.95);
             display: none;
             flex-direction: column;
             justify-content: center;
@@ -125,7 +160,8 @@
             z-index: 10;
             padding: 20px;
             opacity: 0;
-            transition: opacity 0.5s ease;
+            transition: opacity 0.5s ease, background-color 0.5s ease;
+            backdrop-filter: blur(5px);
         }
 
         .menu-section.active {
@@ -135,12 +171,20 @@
 
         .menu-content {
             max-width: 800px;
-            background-color: rgba(20, 20, 20, 0.9);
+            background-color: rgba(20, 20, 20, 0.95);
             padding: 40px;
             border-radius: 20px;
             border: 1px solid rgba(255, 255, 255, 0.1);
             box-shadow: 0 0 30px rgba(255, 0, 255, 0.3);
             position: relative;
+            transform: translateY(20px);
+            opacity: 0;
+            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .menu-section.active .menu-content {
+            transform: translateY(0);
+            opacity: 1;
         }
 
         .menu-title {
@@ -150,11 +194,13 @@
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
+            transition: all 0.3s ease;
         }
 
         .menu-text {
             line-height: 1.6;
             margin-bottom: 30px;
+            transition: all 0.3s ease;
         }
 
         .close-btn {
@@ -166,12 +212,19 @@
             color: rgba(255, 255, 255, 0.7);
             font-size: 1.5rem;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+            width: 30px;
+            height: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
         }
 
         .close-btn:hover {
             color: #ff00ff;
-            transform: rotate(90deg);
+            transform: rotate(90deg) scale(1.1);
+            background: rgba(255, 255, 255, 0.1);
         }
 
         .discord-tag {
@@ -182,14 +235,74 @@
             font-size: 1.2rem;
             margin: 20px 0;
             display: inline-block;
+            transition: all 0.3s ease;
+            transform: scale(1);
+        }
+
+        .discord-tag:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(88, 101, 242, 0.5);
         }
 
         .warning {
             color: #ff5555;
             font-weight: 500;
             margin-top: 20px;
+            transition: all 0.3s ease;
         }
 
+        /* Animations */
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* List items animation */
+        .menu-content ul li {
+            opacity: 0;
+            transform: translateX(-20px);
+            transition: all 0.3s ease;
+        }
+
+        .menu-section.active .menu-content ul li {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* Staggered animation for list items */
+        .menu-section.active .menu-content ul li:nth-child(1) {
+            transition-delay: 0.1s;
+        }
+        .menu-section.active .menu-content ul li:nth-child(2) {
+            transition-delay: 0.2s;
+        }
+        .menu-section.active .menu-content ul li:nth-child(3) {
+            transition-delay: 0.3s;
+        }
+        .menu-section.active .menu-content ul li:nth-child(4) {
+            transition-delay: 0.4s;
+        }
+        .menu-section.active .menu-content ul li:nth-child(5) {
+            transition-delay: 0.5s;
+        }
+        .menu-section.active .menu-content ul li:nth-child(6) {
+            transition-delay: 0.6s;
+        }
+
+        /* Responsive styles */
         @media (max-width: 768px) {
             .logo h1 {
                 font-size: 2.5rem;
@@ -202,10 +315,39 @@
 
             .menu-content {
                 padding: 30px 20px;
+                width: 90%;
             }
 
             .menu-title {
                 font-size: 1.8rem;
+            }
+            
+            .nav-button {
+                padding: 12px 25px;
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo h1 {
+                font-size: 2rem;
+            }
+            
+            .logo p {
+                font-size: 1rem;
+            }
+            
+            .menu-content {
+                padding: 25px 15px;
+            }
+            
+            .menu-title {
+                font-size: 1.5rem;
+            }
+            
+            .discord-tag {
+                font-size: 1rem;
+                padding: 8px 16px;
             }
         }
     </style>
@@ -214,7 +356,7 @@
     <div id="particles-js"></div>
     
     <div class="container" id="main-container">
-        <div class="logo">
+        <div class="logo animate">
             <h1>HornyBite</h1>
             <p>JanitorAI Character Creator</p>
         </div>
@@ -238,7 +380,6 @@
             <h2 class="menu-title">About HornyBite</h2>
             <div class="menu-text">
                 <p>Hi, cuties! I'm HornyBite, a creator on JanitorAI.</p>
-                <p>Fema</p></p>
                 <p>Female, 21.</p>
             </div>
         </div>
@@ -252,7 +393,7 @@
             <div class="menu-text">
                 <p>I make different kinds of bots. If you can't find your type of bot in the list below, I'm not going to make it, even if you request it.</p>
                 <ul style="text-align: left; margin: 20px 0; padding-left: 20px;">
-                    <li><strong>RPG</strong> - I beieve JanitorAI lacks good RPGs</li>
+                    <li><strong>RPG</strong> - I believe JanitorAI lacks good RPGs</li>
                     <li><strong>Fluff</strong> - Rarely, but I do that too</li>
                     <li><strong>Angst</strong> - I love good angst</li>
                     <li><strong>Games, movies, anime, manga characters</strong> - Even if I haven't watched/played/read about that character, I'd look for it on wiki</li>
@@ -287,208 +428,221 @@
 
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
-        // Particles.js configuration
-        particlesJS("particles-js", {
-            "particles": {
-                "number": {
-                    "value": 80,
-                    "density": {
-                        "enable": true,
-                        "value_area": 800
-                    }
-                },
-                "color": {
-                    "value": "#ffffff"
-                },
-                "shape": {
-                    "type": "circle",
-                    "stroke": {
-                        "width": 0,
-                        "color": "#000000"
-                    },
-                    "polygon": {
-                        "nb_sides": 5
-                    }
-                },
-                "opacity": {
-                    "value": 0.5,
-                    "random": false,
-                    "anim": {
-                        "enable": false,
-                        "speed": 1,
-                        "opacity_min": 0.1,
-                        "sync": false
-                    }
-                },
-                "size": {
-                    "value": 3,
-                    "random": true,
-                    "anim": {
-                        "enable": false,
-                        "speed": 40,
-                        "size_min": 0.1,
-                        "sync": false
-                    }
-                },
-                "line_linked": {
-                    "enable": true,
-                    "distance": 150,
-                    "color": "#ffffff",
-                    "opacity": 0.4,
-                    "width": 1
-                },
-                "move": {
-                    "enable": true,
-                    "speed": 2,
-                    "direction": "none",
-                    "random": false,
-                    "straight": false,
-                    "out_mode": "out",
-                    "bounce": false,
-                    "attract": {
-                        "enable": false,
-                        "rotateX": 600,
-                        "rotateY": 1200
-                    }
-                }
-            },
-            "interactivity": {
-                "detect_on": "canvas",
-                "events": {
-                    "onhover": {
-                        "enable": true,
-                        "mode": "grab"
-                    },
-                    "onclick": {
-                        "enable": true,
-                        "mode": "push"
-                    },
-                    "resize": true
-                },
-                "modes": {
-                    "grab": {
-                        "distance": 140,
-                        "line_linked": {
-                            "opacity": 1
+        // Wait for DOM to be fully loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize particles.js with smoother configuration
+            particlesJS("particles-js", {
+                "particles": {
+                    "number": {
+                        "value": 60,
+                        "density": {
+                            "enable": true,
+                            "value_area": 1000
                         }
                     },
-                    "bubble": {
-                        "distance": 400,
-                        "size": 40,
-                        "duration": 2,
-                        "opacity": 8,
-                        "speed": 3
+                    "color": {
+                        "value": "#ffffff"
                     },
-                    "repulse": {
+                    "shape": {
+                        "type": "circle",
+                        "stroke": {
+                            "width": 0,
+                            "color": "#000000"
+                        }
+                    },
+                    "opacity": {
+                        "value": 0.5,
+                        "random": true,
+                        "anim": {
+                            "enable": true,
+                            "speed": 1,
+                            "opacity_min": 0.1,
+                            "sync": false
+                        }
+                    },
+                    "size": {
+                        "value": 3,
+                        "random": true,
+                        "anim": {
+                            "enable": true,
+                            "speed": 2,
+                            "size_min": 0.1,
+                            "sync": false
+                        }
+                    },
+                    "line_linked": {
+                        "enable": true,
                         "distance": 200,
-                        "duration": 0.4
+                        "color": "#ffffff",
+                        "opacity": 0.2,
+                        "width": 1
                     },
-                    "push": {
-                        "particles_nb": 4
-                    },
-                    "remove": {
-                        "particles_nb": 2
+                    "move": {
+                        "enable": true,
+                        "speed": 1.5,
+                        "direction": "none",
+                        "random": true,
+                        "straight": false,
+                        "out_mode": "out",
+                        "bounce": false,
+                        "attract": {
+                            "enable": true,
+                            "rotateX": 600,
+                            "rotateY": 1200
+                        }
                     }
-                }
-            },
-            "retina_detect": true
-        });
+                },
+                "interactivity": {
+                    "detect_on": "canvas",
+                    "events": {
+                        "onhover": {
+                            "enable": true,
+                            "mode": "grab"
+                        },
+                        "onclick": {
+                            "enable": true,
+                            "mode": "push"
+                        },
+                        "resize": true
+                    },
+                    "modes": {
+                        "grab": {
+                            "distance": 150,
+                            "line_linked": {
+                                "opacity": 0.5
+                            }
+                        },
+                        "bubble": {
+                            "distance": 400,
+                            "size": 40,
+                            "duration": 2,
+                            "opacity": 8,
+                            "speed": 3
+                        },
+                        "repulse": {
+                            "distance": 200,
+                            "duration": 0.4
+                        },
+                        "push": {
+                            "particles_nb": 4
+                        },
+                        "remove": {
+                            "particles_nb": 2
+                        }
+                    }
+                },
+                "retina_detect": true
+            });
 
-        // Button hover effects
-        const buttons = document.querySelectorAll('.nav-button');
-        
-        buttons.forEach(button => {
-            button.addEventListener('mouseenter', () => {
-                const randomHue = Math.floor(Math.random() * 360);
-                button.style.borderColor = `hsl(${randomHue}, 100%, 70%)`;
-                button.style.boxShadow = `0 0 10px hsl(${randomHue}, 100%, 50%), 0 0 20px hsl(${randomHue}, 100%, 50%)`;
+            // Button hover effects with smoother color transitions
+            const buttons = document.querySelectorAll('.nav-button');
+            
+            buttons.forEach(button => {
+                button.addEventListener('mouseenter', () => {
+                    const randomHue = Math.floor(Math.random() * 360);
+                    button.style.borderColor = `hsl(${randomHue}, 100%, 70%)`;
+                    button.style.boxShadow = `0 0 15px hsl(${randomHue}, 100%, 50%), 0 0 25px hsl(${randomHue}, 100%, 50%)`;
+                });
+                
+                button.addEventListener('mouseleave', () => {
+                    button.style.borderColor = 'rgba(255, 255, 255, 0.3)';
+                    button.style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.1)';
+                });
+            });
+
+            // Menu functionality with smoother transitions
+            const mainContainer = document.getElementById('main-container');
+            const logo = document.querySelector('.logo');
+            const footer = document.querySelector('.footer');
+            const aboutBtn = document.getElementById('about-btn');
+            const botsBtn = document.getElementById('bots-btn');
+            const discordBtn = document.getElementById('discord-btn');
+            const aboutSection = document.getElementById('about-section');
+            const botsSection = document.getElementById('bots-section');
+            const discordSection = document.getElementById('discord-section');
+            const closeAbout = document.getElementById('close-about');
+            const closeBots = document.getElementById('close-bots');
+            const closeDiscord = document.getElementById('close-discord');
+            const particles = document.getElementById('particles-js');
+
+            function openMenu(section) {
+                // Hide main content with animation
+                mainContainer.classList.add('hidden');
+                footer.classList.add('hidden');
+                
+                // Show selected menu section
+                setTimeout(() => {
+                    section.classList.add('active');
+                    particles.style.opacity = '0.3';
+                }, 300);
+            }
+
+            function closeMenu(section) {
+                // Hide menu section
+                section.classList.remove('active');
+                particles.style.opacity = '0.7';
+                
+                // Show main content with animation
+                setTimeout(() => {
+                    mainContainer.classList.remove('hidden');
+                    footer.classList.remove('hidden');
+                }, 300);
+            }
+
+            // Show about section
+            aboutBtn.addEventListener('click', () => {
+                openMenu(aboutSection);
+            });
+
+            // Show bots section
+            botsBtn.addEventListener('click', () => {
+                openMenu(botsSection);
+            });
+
+            // Show discord section
+            discordBtn.addEventListener('click', () => {
+                openMenu(discordSection);
+            });
+
+            // Close about section
+            closeAbout.addEventListener('click', () => {
+                closeMenu(aboutSection);
+            });
+
+            // Close bots section
+            closeBots.addEventListener('click', () => {
+                closeMenu(botsSection);
+            });
+
+            // Close discord section
+            closeDiscord.addEventListener('click', () => {
+                closeMenu(discordSection);
+            });
+
+            // Close menus when clicking outside content
+            [aboutSection, botsSection, discordSection].forEach(section => {
+                section.addEventListener('click', (e) => {
+                    if (e.target === section) {
+                        const closeBtn = section.querySelector('.close-btn');
+                        closeBtn.click();
+                    }
+                });
+            });
+
+            // Add initial animation to logo
+            setTimeout(() => {
+                logo.classList.add('animate');
+            }, 500);
+            
+            // Add hover effect to logo text
+            logo.addEventListener('mouseenter', () => {
+                logo.querySelector('h1').style.textShadow = '0 0 20px rgba(255, 0, 255, 0.5)';
+                logo.querySelector('p').style.color = 'rgba(255, 255, 255, 0.9)';
             });
             
-            button.addEventListener('mouseleave', () => {
-                button.style.borderColor = 'rgba(255, 255, 255, 0.3)';
-                button.style.boxShadow = 'none';
-            });
-        });
-
-        // Menu functionality
-        const mainContainer = document.getElementById('main-container');
-        const aboutBtn = document.getElementById('about-btn');
-        const botsBtn = document.getElementById('bots-btn');
-        const discordBtn = document.getElementById('discord-btn');
-        const aboutSection = document.getElementById('about-section');
-        const botsSection = document.getElementById('bots-section');
-        const discordSection = document.getElementById('discord-section');
-        const closeAbout = document.getElementById('close-about');
-        const closeBots = document.getElementById('close-bots');
-        const closeDiscord = document.getElementById('close-discord');
-
-        // Show about section
-        aboutBtn.addEventListener('click', () => {
-            mainContainer.style.opacity = '0';
-            setTimeout(() => {
-                mainContainer.style.display = 'none';
-                aboutSection.classList.add('active');
-            }, 500);
-        });
-
-        // Show bots section
-        botsBtn.addEventListener('click', () => {
-            mainContainer.style.opacity = '0';
-            setTimeout(() => {
-                mainContainer.style.display = 'none';
-                botsSection.classList.add('active');
-            }, 500);
-        });
-
-        // Show discord section
-        discordBtn.addEventListener('click', () => {
-            mainContainer.style.opacity = '0';
-            setTimeout(() => {
-                mainContainer.style.display = 'none';
-                discordSection.classList.add('active');
-            }, 500);
-        });
-
-        // Close about section
-        closeAbout.addEventListener('click', () => {
-            aboutSection.classList.remove('active');
-            setTimeout(() => {
-                mainContainer.style.display = 'flex';
-                setTimeout(() => {
-                    mainContainer.style.opacity = '1';
-                }, 50);
-            }, 500);
-        });
-
-        // Close bots section
-        closeBots.addEventListener('click', () => {
-            botsSection.classList.remove('active');
-            setTimeout(() => {
-                mainContainer.style.display = 'flex';
-                setTimeout(() => {
-                    mainContainer.style.opacity = '1';
-                }, 50);
-            }, 500);
-        });
-
-        // Close discord section
-        closeDiscord.addEventListener('click', () => {
-            discordSection.classList.remove('active');
-            setTimeout(() => {
-                mainContainer.style.display = 'flex';
-                setTimeout(() => {
-                    mainContainer.style.opacity = '1';
-                }, 50);
-            }, 500);
-        });
-
-        // Close menus when clicking outside content
-        [aboutSection, botsSection, discordSection].forEach(section => {
-            section.addEventListener('click', (e) => {
-                if (e.target === section) {
-                    const closeBtn = section.querySelector('.close-btn');
-                    closeBtn.click();
-                }
+            logo.addEventListener('mouseleave', () => {
+                logo.querySelector('h1').style.textShadow = '0 0 10px rgba(255, 0, 255, 0.3)';
+                logo.querySelector('p').style.color = 'rgba(255, 255, 255, 0.7)';
             });
         });
     </script>
