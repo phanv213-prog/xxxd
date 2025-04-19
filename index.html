@@ -1,16 +1,496 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PE Файл Резольв</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>HornyBite | JanitorAI Character Creator</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #000;
+            color: #fff;
+            overflow: hidden;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 0;
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            max-width: 1200px;
+            padding: 0 20px;
+            transition: all 0.5s ease;
+        }
+
+        .logo {
+            margin-bottom: 40px;
+        }
+
+        .logo h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, #ff00ff, #00ffff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .logo p {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .nav-buttons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 50px;
+        }
+
+        .nav-button {
+            position: relative;
+            padding: 15px 30px;
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 500;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            overflow: hidden;
+            background: transparent;
+            cursor: pointer;
+        }
+
+        .nav-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: 0.5s;
+        }
+
+        .nav-button:hover {
+            border-color: #ff00ff;
+            box-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff;
+        }
+
+        .nav-button:hover::before {
+            left: 100%;
+        }
+
+        .footer {
+            margin-top: 80px;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+        }
+
+        /* Menu sections */
+        .menu-section {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+            padding: 20px;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .menu-section.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .menu-content {
+            max-width: 800px;
+            background-color: rgba(20, 20, 20, 0.9);
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 30px rgba(255, 0, 255, 0.3);
+            position: relative;
+        }
+
+        .menu-title {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #ff00ff, #00ffff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .menu-text {
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: transparent;
+            border: none;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .close-btn:hover {
+            color: #ff00ff;
+            transform: rotate(90deg);
+        }
+
+        .discord-tag {
+            background-color: #5865F2;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-family: monospace;
+            font-size: 1.2rem;
+            margin: 20px 0;
+            display: inline-block;
+        }
+
+        .warning {
+            color: #ff5555;
+            font-weight: 500;
+            margin-top: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .logo h1 {
+                font-size: 2.5rem;
+            }
+            
+            .nav-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .menu-content {
+                padding: 30px 20px;
+            }
+
+            .menu-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
 </head>
 <body>
-    <h1>Резольв Экспортов PE Файла</h1>
-    <input type="file" id="fileInput" accept=".dll">
-    <button id="analyzeButton">Анализировать</button>
-    <div id="output"></div>
-    <script src="script.js"></script>
+    <div id="particles-js"></div>
+    
+    <div class="container" id="main-container">
+        <div class="logo">
+            <h1>HornyBite</h1>
+            <p>JanitorAI Character Creator</p>
+        </div>
+        
+        <div class="nav-buttons">
+            <button class="nav-button" id="about-btn">About Me</button>
+            <button class="nav-button" id="bots-btn">Bots I Make</button>
+            <a href="https://janitorai.com" target="_blank" class="nav-button" id="janitor-btn">Janitor AI Profile</a>
+            <button class="nav-button" id="discord-btn">Discord DM</button>
+        </div>
+        
+        <div class="footer">
+            <p>© 2023 HornyBite | All characters are fictional</p>
+        </div>
+    </div>
+
+    <!-- About Me Section -->
+    <div class="menu-section" id="about-section">
+        <div class="menu-content">
+            <button class="close-btn" id="close-about">×</button>
+            <h2 class="menu-title">About HornyBite</h2>
+            <div class="menu-text">
+                <p>Hello there! I'm HornyBite, a passionate JanitorAI character creator specializing in NSFW content.</p>
+                <p>With a focus on detailed personalities and immersive scenarios, I craft characters that feel alive and responsive to user interactions.</p>
+                <p>My creations range from dominant to submissive personalities, each with unique backstories and response patterns.</p>
+                <p>When I'm not creating new bots, you can find me refining existing characters or brainstorming new kinky concepts.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bots I Make Section -->
+    <div class="menu-section" id="bots-section">
+        <div class="menu-content">
+            <button class="close-btn" id="close-bots">×</button>
+            <h2 class="menu-title">Bots I Create</h2>
+            <div class="menu-text">
+                <p>I specialize in creating diverse NSFW characters with unique personalities and kinks. Here are some examples of my work:</p>
+                <ul style="text-align: left; margin: 20px 0; padding-left: 20px;">
+                    <li><strong>Dominant Types</strong> - Strict bosses, possessive partners, and authoritative figures</li>
+                    <li><strong>Submissive Types</strong> - Shy characters, willing prey, and obedient partners</li>
+                    <li><strong>Switch Personalities</strong> - Characters that adapt to user's behavior</li>
+                    <li><strong>Fantasy Creatures</strong> - From vampires to werewolves with unique kinks</li>
+                    <li><strong>Realistic Scenarios</strong> - Everyday situations with a kinky twist</li>
+                </ul>
+                <p>All my bots feature detailed descriptions, example dialogues, and specific kink preferences to enhance your experience.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Discord Section -->
+    <div class="menu-section" id="discord-section">
+        <div class="menu-content">
+            <button class="close-btn" id="close-discord">×</button>
+            <h2 class="menu-title">Contact Me on Discord</h2>
+            <div class="menu-text">
+                <p>Feel free to reach out to me on Discord for commissions, questions, or just to chat about character creation!</p>
+                <div class="discord-tag">HornyBite#1234</div>
+                <p>My DMs are open to everyone, but please be respectful and mindful of my time.</p>
+                <p>I'm happy to discuss:</p>
+                <ul style="text-align: left; margin: 20px 0; padding-left: 20px;">
+                    <li>Custom character commissions</li>
+                    <li>Feedback on my existing bots</li>
+                    <li>Collaboration opportunities</li>
+                    <li>General NSFW character creation tips</li>
+                </ul>
+                <p class="warning">⚠️ I immediately block anyone who spams, disrespects me, or sends unsolicited explicit content.</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        // Particles.js configuration
+        particlesJS("particles-js", {
+            "particles": {
+                "number": {
+                    "value": 80,
+                    "density": {
+                        "enable": true,
+                        "value_area": 800
+                    }
+                },
+                "color": {
+                    "value": "#ffffff"
+                },
+                "shape": {
+                    "type": "circle",
+                    "stroke": {
+                        "width": 0,
+                        "color": "#000000"
+                    },
+                    "polygon": {
+                        "nb_sides": 5
+                    }
+                },
+                "opacity": {
+                    "value": 0.5,
+                    "random": false,
+                    "anim": {
+                        "enable": false,
+                        "speed": 1,
+                        "opacity_min": 0.1,
+                        "sync": false
+                    }
+                },
+                "size": {
+                    "value": 3,
+                    "random": true,
+                    "anim": {
+                        "enable": false,
+                        "speed": 40,
+                        "size_min": 0.1,
+                        "sync": false
+                    }
+                },
+                "line_linked": {
+                    "enable": true,
+                    "distance": 150,
+                    "color": "#ffffff",
+                    "opacity": 0.4,
+                    "width": 1
+                },
+                "move": {
+                    "enable": true,
+                    "speed": 2,
+                    "direction": "none",
+                    "random": false,
+                    "straight": false,
+                    "out_mode": "out",
+                    "bounce": false,
+                    "attract": {
+                        "enable": false,
+                        "rotateX": 600,
+                        "rotateY": 1200
+                    }
+                }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": {
+                    "onhover": {
+                        "enable": true,
+                        "mode": "grab"
+                    },
+                    "onclick": {
+                        "enable": true,
+                        "mode": "push"
+                    },
+                    "resize": true
+                },
+                "modes": {
+                    "grab": {
+                        "distance": 140,
+                        "line_linked": {
+                            "opacity": 1
+                        }
+                    },
+                    "bubble": {
+                        "distance": 400,
+                        "size": 40,
+                        "duration": 2,
+                        "opacity": 8,
+                        "speed": 3
+                    },
+                    "repulse": {
+                        "distance": 200,
+                        "duration": 0.4
+                    },
+                    "push": {
+                        "particles_nb": 4
+                    },
+                    "remove": {
+                        "particles_nb": 2
+                    }
+                }
+            },
+            "retina_detect": true
+        });
+
+        // Button hover effects
+        const buttons = document.querySelectorAll('.nav-button');
+        
+        buttons.forEach(button => {
+            button.addEventListener('mouseenter', () => {
+                const randomHue = Math.floor(Math.random() * 360);
+                button.style.borderColor = `hsl(${randomHue}, 100%, 70%)`;
+                button.style.boxShadow = `0 0 10px hsl(${randomHue}, 100%, 50%), 0 0 20px hsl(${randomHue}, 100%, 50%)`;
+            });
+            
+            button.addEventListener('mouseleave', () => {
+                button.style.borderColor = 'rgba(255, 255, 255, 0.3)';
+                button.style.boxShadow = 'none';
+            });
+        });
+
+        // Menu functionality
+        const mainContainer = document.getElementById('main-container');
+        const aboutBtn = document.getElementById('about-btn');
+        const botsBtn = document.getElementById('bots-btn');
+        const discordBtn = document.getElementById('discord-btn');
+        const aboutSection = document.getElementById('about-section');
+        const botsSection = document.getElementById('bots-section');
+        const discordSection = document.getElementById('discord-section');
+        const closeAbout = document.getElementById('close-about');
+        const closeBots = document.getElementById('close-bots');
+        const closeDiscord = document.getElementById('close-discord');
+
+        // Show about section
+        aboutBtn.addEventListener('click', () => {
+            mainContainer.style.opacity = '0';
+            setTimeout(() => {
+                mainContainer.style.display = 'none';
+                aboutSection.classList.add('active');
+            }, 500);
+        });
+
+        // Show bots section
+        botsBtn.addEventListener('click', () => {
+            mainContainer.style.opacity = '0';
+            setTimeout(() => {
+                mainContainer.style.display = 'none';
+                botsSection.classList.add('active');
+            }, 500);
+        });
+
+        // Show discord section
+        discordBtn.addEventListener('click', () => {
+            mainContainer.style.opacity = '0';
+            setTimeout(() => {
+                mainContainer.style.display = 'none';
+                discordSection.classList.add('active');
+            }, 500);
+        });
+
+        // Close about section
+        closeAbout.addEventListener('click', () => {
+            aboutSection.classList.remove('active');
+            setTimeout(() => {
+                mainContainer.style.display = 'flex';
+                setTimeout(() => {
+                    mainContainer.style.opacity = '1';
+                }, 50);
+            }, 500);
+        });
+
+        // Close bots section
+        closeBots.addEventListener('click', () => {
+            botsSection.classList.remove('active');
+            setTimeout(() => {
+                mainContainer.style.display = 'flex';
+                setTimeout(() => {
+                    mainContainer.style.opacity = '1';
+                }, 50);
+            }, 500);
+        });
+
+        // Close discord section
+        closeDiscord.addEventListener('click', () => {
+            discordSection.classList.remove('active');
+            setTimeout(() => {
+                mainContainer.style.display = 'flex';
+                setTimeout(() => {
+                    mainContainer.style.opacity = '1';
+                }, 50);
+            }, 500);
+        });
+
+        // Close menus when clicking outside content
+        [aboutSection, botsSection, discordSection].forEach(section => {
+            section.addEventListener('click', (e) => {
+                if (e.target === section) {
+                    const closeBtn = section.querySelector('.close-btn');
+                    closeBtn.click();
+                }
+            });
+        });
+    </script>
 </body>
 </html>
