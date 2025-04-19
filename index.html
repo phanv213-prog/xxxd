@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>HornyBite | JanitorAI Creator</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
@@ -163,6 +163,8 @@
             pointer-events: none;
             transition: opacity 0.4s ease, background-color 0.4s ease;
             backdrop-filter: blur(0px);
+            transform: translateX(100%);
+            transition: transform 0.5s cubic-bezier(0.65, 0, 0.35, 1), opacity 0.4s ease, background-color 0.4s ease;
         }
 
         .menu-section.active {
@@ -170,6 +172,7 @@
             pointer-events: auto;
             background-color: rgba(0, 0, 0, 0.95);
             backdrop-filter: blur(5px);
+            transform: translateX(0);
         }
 
         .menu-content {
@@ -359,10 +362,15 @@
             align-items: center;
             padding: 20px;
             overflow-y: auto;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
         }
 
         .gallery-container.active {
             display: flex;
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .gallery-header {
@@ -419,25 +427,7 @@
             transform: scale(1.05);
         }
 
-        .back-btn {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: transparent;
-            border: none;
-            color: white;
-            font-size: 1.5rem;
-            cursor: pointer;
-            z-index: 101;
-            padding: 10px;
-            border-radius: 50%;
-            transition: all 0.3s ease;
-        }
-
-        .back-btn:hover {
-            background: rgba(255, 255, 255, 0.1);
-            transform: scale(1.1);
-        }
+        /* Removed back button styles since button is removed */
 
         /* Animations */
         @keyframes float {
@@ -583,6 +573,34 @@
                 grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
             }
         }
+
+        /* Custom scrollbar styles */
+        /* For WebKit browsers */
+        ::-webkit-scrollbar {
+            width: 12px;
+            background-color: #111;
+        }
+
+        ::-webkit-scrollbar-track {
+            background-color: #111;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(45deg, #ff00ff, #00ffff);
+            border-radius: 10px;
+            border: 3px solid #111;
+        }
+
+        /* For Firefox */
+        * {
+            scrollbar-width: thin;
+            scrollbar-color: #ff00ff #111;
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
     </style>
 </head>
 <body>
@@ -688,49 +706,56 @@
         </div>
     </div>
 
-    <!-- Hidden Ruan Mei Gallery (only accessible via direct link) -->
-    <div class="gallery-container" id="ruan-mei-gallery">
-        <button class="back-btn" id="back-btn">×</button>
+    <!-- Hidden Ruan Mei SFW Gallery -->
+    <div class="gallery-container" id="ruan-mei-gallery-sfw">
         <div class="gallery-header">
-            <h1 class="gallery-title">Ruan Mei</h1>
-            <p class="gallery-subtitle">Character Gallery</p>
+            <h1 class="gallery-title">Ruan Mei - SFW</h1>
+            <p class="gallery-subtitle">Safe For Work Character Gallery</p>
         </div>
         <div class="gallery-grid">
             <div class="gallery-item">
-                <img src="https://via.placeholder.com/500x500/ff00ff/ffffff?text=Ruan+Mei+1" alt="Ruan Mei Image 1">
+                <img src="https://via.placeholder.com/500x500/ff00ff/ffffff?text=Ruan+Mei+1" alt="Ruan Mei Image 1" />
             </div>
             <div class="gallery-item">
-                <img src="https://via.placeholder.com/500x500/00ffff/ffffff?text=Ruan+Mei+2" alt="Ruan Mei Image 2">
+                <img src="https://via.placeholder.com/500x500/00ffff/ffffff?text=Ruan+Mei+2" alt="Ruan Mei Image 2" />
             </div>
             <div class="gallery-item">
-                <img src="https://via.placeholder.com/500x500/ff00ff/ffffff?text=Ruan+Mei+3" alt="Ruan Mei Image 3">
-            </div>
-            <div class="gallery-item">
-                <img src="https://via.placeholder.com/500x500/00ffff/ffffff?text=Ruan+Mei+4" alt="Ruan Mei Image 4">
-            </div>
-            <div class="gallery-item">
-                <img src="https://via.placeholder.com/500x500/ff00ff/ffffff?text=Ruan+Mei+5" alt="Ruan Mei Image 5">
-            </div>
-            <div class="gallery-item">
-                <img src="https://via.placeholder.com/500x500/00ffff/ffffff?text=Ruan+Mei+6" alt="Ruan Mei Image 6">
+                <img src="https://via.placeholder.com/500x500/ff00ff/ffffff?text=Ruan+Mei+3" alt="Ruan Mei Image 3" />
             </div>
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    <script>
+    <!-- Hidden Ruan Mei NSFW Gallery -->
+    <div class="gallery-container" id="ruan-mei-gallery-nsfw">
+        <div class="gallery-header">
+            <h1 class="gallery-title">Ruan Mei - NSFW</h1>
+            <p class="gallery-subtitle">Not Safe For Work Character Gallery</p>
+        </div>
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="https://via.placeholder.com/500x500/00ffff/ffffff?text=Ruan+Mei+4" alt="Ruan Mei Image 4" />
+            </div>
+            <div class="gallery-item">
+                <img src="https://via.placeholder.com/500x500/ff00ff/ffffff?text=Ruan+Mei+5" alt="Ruan Mei Image 5" />
+            </div>
+            <div class="gallery-item">
+                <img src="https://via.placeholder.com/500x500/00ffff/ffffff?text=Ruan+Mei+6" alt="Ruan Mei Image 6" />
+            </div>
+        </div>
+    </div>
+
+        <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+        <script>
         // Wait for DOM to be fully loaded
         document.addEventListener('DOMContentLoaded', function() {
-            // Check URL for gallery parameter
-            const urlParams = new URLSearchParams(window.location.search);
-            if (urlParams.has('gallery') && urlParams.get('gallery') === 'ruanmei') {
-                // Show gallery and hide main page
-                document.getElementById('main-container').style.display = 'none';
-                document.getElementById('particles-js').style.display = 'none';
-                document.getElementById('ruan-mei-gallery').classList.add('active');
-            }
+        // Check URL for gallery parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const mainContainer = document.getElementById('main-container');
+        const particles = document.getElementById('particles-js');
+        const ruanSfwGallery = document.getElementById('ruan-mei-gallery-sfw');
+        const ruanNsfwGallery = document.getElementById('ruan-mei-gallery-nsfw');
 
-            // Initialize particles.js with smoother configuration
+        function initParticles() {
             particlesJS("particles-js", {
                 "particles": {
                     "number": {
@@ -833,86 +858,64 @@
                 },
                 "retina_detect": true
             });
+        }
 
-            // Button hover effects with smoother color transitions
-            const buttons = document.querySelectorAll('.nav-button');
-            
-            buttons.forEach(button => {
-                button.addEventListener('mouseenter', () => {
-                    const randomHue = Math.floor(Math.random() * 360);
-                    button.style.borderColor = `hsl(${randomHue}, 100%, 70%)`;
-                    button.style.boxShadow = `0 0 15px hsl(${randomHue}, 100%, 50%), 0 0 25px hsl(${randomHue}, 100%, 50%)`;
-                });
-                
-                button.addEventListener('mouseleave', () => {
-                    button.style.borderColor = 'rgba(255, 255, 255, 0.3)';
-                    button.style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.1)';
-                });
-            });
-
-            // Menu functionality with smoother transitions
-            const mainContainer = document.getElementById('main-container');
-            const logo = document.querySelector('.logo');
-            const footer = document.querySelector('.footer');
-            const aboutBtn = document.getElementById('about-btn');
-            const botsBtn = document.getElementById('bots-btn');
-            const requestsBtn = document.getElementById('requests-btn');
-            const discordBtn = document.getElementById('discord-btn');
-            const aboutSection = document.getElementById('about-section');
-            const botsSection = document.getElementById('bots-section');
-            const requestsSection = document.getElementById('requests-section');
-            const discordSection = document.getElementById('discord-section');
-            const closeAbout = document.getElementById('close-about');
-            const closeBots = document.getElementById('close-bots');
-            const closeRequests = document.getElementById('close-requests');
-            const closeDiscord = document.getElementById('close-discord');
-            const particles = document.getElementById('particles-js');
-            const discordTag = document.getElementById('discord-tag');
-            const backBtn = document.getElementById('back-btn');
-            const ruanMeiGallery = document.getElementById('ruan-mei-gallery');
-
-            // Back button functionality for gallery
-            if (backBtn) {
-                backBtn.addEventListener('click', function() {
-                    window.location.href = window.location.pathname;
-                });
+        if (urlParams.has('gallery')) {
+            const galleryParam = urlParams.get('gallery');
+            if (galleryParam === 'ruanmei-sfw') {
+                mainContainer.style.display = 'none';
+                particles.style.display = 'block';
+                ruanSfwGallery.classList.add('active');
+                initParticles();
+            } else if (galleryParam === 'ruanmei-nsfw') {
+                mainContainer.style.display = 'none';
+                particles.style.display = 'block';
+                ruanNsfwGallery.classList.add('active');
+                initParticles();
             }
+        } else {
+            initParticles();
+        }
 
-            // Discord tag copy functionality
-            discordTag.addEventListener('click', function() {
-                const text = this.textContent;
-                navigator.clipboard.writeText(text).then(() => {
-                    // Show copied feedback
-                    this.classList.add('copied');
-                    setTimeout(() => {
-                        this.classList.remove('copied');
-                    }, 2000);
-                }).catch(err => {
-                    console.error('Failed to copy text: ', err);
-                    // Fallback for browsers that don't support clipboard API
-                    const textarea = document.createElement('textarea');
-                    textarea.value = text;
-                    document.body.appendChild(textarea);
-                    textarea.select();
-                    try {
-                        document.execCommand('copy');
-                        this.classList.add('copied');
-                        setTimeout(() => {
-                            this.classList.remove('copied');
-                        }, 2000);
-                    } catch (err) {
-                        console.error('Fallback copy failed: ', err);
-                    }
-                    document.body.removeChild(textarea);
-                });
+        // Button hover effects with smoother color transitions
+        const buttons = document.querySelectorAll('.nav-button');
+        
+        buttons.forEach(button => {
+            button.addEventListener('mouseenter', () => {
+                const randomHue = Math.floor(Math.random() * 360);
+                button.style.borderColor = `hsl(${randomHue}, 100%, 70%)`;
+                button.style.boxShadow = `0 0 15px hsl(${randomHue}, 100%, 50%), 0 0 25px hsl(${randomHue}, 100%, 50%)`;
             });
+            
+            button.addEventListener('mouseleave', () => {
+                button.style.borderColor = 'rgba(255, 255, 255, 0.3)';
+                button.style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.1)';
+            });
+        });
+
+        // Menu functionality with smoother transitions and slide effect
+        const logo = document.querySelector('.logo');
+        const footer = document.querySelector('.footer');
+        const aboutBtn = document.getElementById('about-btn');
+        const botsBtn = document.getElementById('bots-btn');
+        const requestsBtn = document.getElementById('requests-btn');
+        const discordBtn = document.getElementById('discord-btn');
+        const aboutSection = document.getElementById('about-section');
+        const botsSection = document.getElementById('bots-section');
+        const requestsSection = document.getElementById('requests-section');
+        const discordSection = document.getElementById('discord-section');
+        const closeAbout = document.getElementById('close-about');
+        const closeBots = document.getElementById('close-bots');
+        const closeRequests = document.getElementById('close-requests');
+        const closeDiscord = document.getElementById('close-discord');
+        const discordTag = document.getElementById('discord-tag');
 
             function openMenu(section) {
                 // Hide main content with animation
                 mainContainer.classList.add('hidden');
                 footer.classList.add('hidden');
                 
-                // Show selected menu section
+                // Show selected menu section with slide-in
                 setTimeout(() => {
                     section.classList.add('active');
                     particles.style.opacity = '0.3';
@@ -920,7 +923,7 @@
             }
 
             function closeMenu(section) {
-                // Hide menu section
+                // Hide menu section with slide-out
                 section.classList.remove('active');
                 particles.style.opacity = '0.7';
                 
@@ -996,7 +999,37 @@
                 logo.querySelector('h1').style.textShadow = '0 0 10px rgba(255, 0, 255, 0.3)';
                 logo.querySelector('p').style.color = 'rgba(255, 255, 255, 0.7)';
             });
+
+            // Discord tag copy functionality
+            discordTag.addEventListener('click', function() {
+                const text = this.textContent;
+                navigator.clipboard.writeText(text).then(() => {
+                    // Show copied feedback
+                    this.classList.add('copied');
+                    setTimeout(() => {
+                        this.classList.remove('copied');
+                    }, 2000);
+                }).catch(err => {
+                    console.error('Failed to copy text: ', err);
+                    // Fallback for browsers that don't support clipboard API
+                    const textarea = document.createElement('textarea');
+                    textarea.value = text;
+                    document.body.appendChild(textarea);
+                    textarea.select();
+                    try {
+                        document.execCommand('copy');
+                        this.classList.add('copied');
+                        setTimeout(() => {
+                            this.classList.remove('copied');
+                        }, 2000);
+                    } catch (err) {
+                        console.error('Fallback copy failed: ', err);
+                    }
+                    document.body.removeChild(textarea);
+                });
+            });
         });
     </script>
 </body>
 </html>
+
