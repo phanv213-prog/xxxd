@@ -692,7 +692,7 @@
             <h2 class="menu-title">Contact Me on Discord</h2>
             <div class="menu-text">
                 <p>Feel free to reach out to me on Discord for commissions, questions, or just to chat about character creation!</p>
-                <div class="discord-tag" id="discord-tag">HornyBite#1234</div>
+                <div class="discord-tag" id="discord-tag">HornyBite</div>
                 <p>My DMs are open to everyone, but please be respectful and mindful of my time.</p>
                 <p>I'm happy to discuss:</p>
                 <ul style="text-align: left; margin: 20px 0; padding-left: 20px;">
@@ -714,13 +714,13 @@
         </div>
         <div class="gallery-grid">
             <div class="gallery-item">
-                <img src="https://via.placeholder.com/500x500/ff00ff/ffffff?text=Ruan+Mei+1" alt="Ruan Mei Image 1" />
+                <img src="https://i.imgur.com/s167tbq.jpeg" alt="Ruan Mei Image 1" />
             </div>
             <div class="gallery-item">
-                <img src="https://via.placeholder.com/500x500/00ffff/ffffff?text=Ruan+Mei+2" alt="Ruan Mei Image 2" />
+                <img src="https://i.imgur.com/DZiqTRw.jpeg" alt="Ruan Mei Image 2" />
             </div>
             <div class="gallery-item">
-                <img src="https://via.placeholder.com/500x500/ff00ff/ffffff?text=Ruan+Mei+3" alt="Ruan Mei Image 3" />
+                <img src="https://i.imgur.com/u5x4nvt.jpeg" alt="Ruan Mei Image 3" />
             </div>
         </div>
     </div>
@@ -733,13 +733,13 @@
         </div>
         <div class="gallery-grid">
             <div class="gallery-item">
-                <img src="https://via.placeholder.com/500x500/00ffff/ffffff?text=Ruan+Mei+4" alt="Ruan Mei Image 4" />
+                <img src="https://i.imgur.com/4lnaCbr.jpeg" alt="Ruan Mei Image 4" />
             </div>
             <div class="gallery-item">
-                <img src="https://via.placeholder.com/500x500/ff00ff/ffffff?text=Ruan+Mei+5" alt="Ruan Mei Image 5" />
+                <img src="https://i.imgur.com/WadnLHf.jpeg" alt="Ruan Mei Image 5" />
             </div>
             <div class="gallery-item">
-                <img src="https://via.placeholder.com/500x500/00ffff/ffffff?text=Ruan+Mei+6" alt="Ruan Mei Image 6" />
+                <img src="https://i.imgur.com/05Bvbku.jpeg" alt="Ruan Mei Image 6" />
             </div>
         </div>
     </div>
@@ -755,6 +755,40 @@
         const ruanSfwGallery = document.getElementById('ruan-mei-gallery-sfw');
         const ruanNsfwGallery = document.getElementById('ruan-mei-gallery-nsfw');
 
+        // Throttle click events on particles to reduce CPU usage
+        let lastClickTime = 0;
+        const clickDelay = 500; // milliseconds
+
+        if (urlParams.has('gallery')) {
+            const galleryParam = urlParams.get('gallery');
+            if (galleryParam === 'ruanmei-sfw') {
+                mainContainer.style.display = 'none';
+                particles.style.display = 'block';
+                ruanSfwGallery.classList.add('active');
+            } else if (galleryParam === 'ruanmei-nsfw') {
+                mainContainer.style.display = 'none';
+                particles.style.display = 'block';
+                ruanNsfwGallery.classList.add('active');
+            }
+        }
+
+        // Button hover effects with smoother color transitions
+        const buttons = document.querySelectorAll('.nav-button');
+        
+        buttons.forEach(button => {
+            button.addEventListener('mouseenter', () => {
+                const randomHue = Math.floor(Math.random() * 360);
+                button.style.borderColor = `hsl(${randomHue}, 100%, 70%)`;
+                button.style.boxShadow = `0 0 15px hsl(${randomHue}, 100%, 50%), 0 0 25px hsl(${randomHue}, 100%, 50%)`;
+            });
+            
+            button.addEventListener('mouseleave', () => {
+                button.style.borderColor = 'rgba(255, 255, 255, 0.3)';
+                button.style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.1)';
+            });
+        });
+
+        // Initialize particles with throttled click event
         function initParticles() {
             particlesJS("particles-js", {
                 "particles": {
@@ -858,40 +892,23 @@
                 },
                 "retina_detect": true
             });
-        }
 
-        if (urlParams.has('gallery')) {
-            const galleryParam = urlParams.get('gallery');
-            if (galleryParam === 'ruanmei-sfw') {
-                mainContainer.style.display = 'none';
-                particles.style.display = 'block';
-                ruanSfwGallery.classList.add('active');
-                initParticles();
-            } else if (galleryParam === 'ruanmei-nsfw') {
-                mainContainer.style.display = 'none';
-                particles.style.display = 'block';
-                ruanNsfwGallery.classList.add('active');
-                initParticles();
+            // Override click event to add delay
+            const canvas = document.querySelector('#particles-js canvas');
+            if (canvas) {
+                canvas.addEventListener('click', (event) => {
+                    const now = Date.now();
+                    if (now - lastClickTime > clickDelay) {
+                        lastClickTime = now;
+                        // Manually trigger particles.js push mode
+                        window.pJSDom[0].pJS.interactivity.modes.pushParticles(4);
+                    }
+                });
             }
-        } else {
-            initParticles();
         }
 
-        // Button hover effects with smoother color transitions
-        const buttons = document.querySelectorAll('.nav-button');
-        
-        buttons.forEach(button => {
-            button.addEventListener('mouseenter', () => {
-                const randomHue = Math.floor(Math.random() * 360);
-                button.style.borderColor = `hsl(${randomHue}, 100%, 70%)`;
-                button.style.boxShadow = `0 0 15px hsl(${randomHue}, 100%, 50%), 0 0 25px hsl(${randomHue}, 100%, 50%)`;
-            });
-            
-            button.addEventListener('mouseleave', () => {
-                button.style.borderColor = 'rgba(255, 255, 255, 0.3)';
-                button.style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.1)';
-            });
-        });
+        // Initialize particles
+        initParticles();
 
         // Menu functionality with smoother transitions and slide effect
         const logo = document.querySelector('.logo');
